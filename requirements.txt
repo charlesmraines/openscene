@@ -1,6 +1,7 @@
 scipy
 open3d
 ftfy
+tensorflow
 tensorboardx
 tqdm
 imageio

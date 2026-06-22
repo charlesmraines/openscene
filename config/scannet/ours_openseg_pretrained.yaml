@@ -39,10 +39,10 @@ TEST:
   vis_input: False
   vis_pred: False
   vis_gt: False
-  test_workers: 8
+  test_workers: 1
   test_gpu: [0]
   test_batch_size: 1
-  test_repeats: 5
+  test_repeats: 1
   model_path: 'https://cvg-data.inf.ethz.ch/openscene/models/scannet_openseg.pth.tar'
   save_folder:
 
