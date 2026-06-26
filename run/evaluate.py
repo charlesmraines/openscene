@@ -25,6 +25,9 @@ from run.distill import get_model
 from dataset.label_constants import *
 
 
+import gc
+
+
 def get_parser():
     '''Parse the config file.'''
 
@@ -209,7 +212,7 @@ def main_worker(gpu, ngpus_per_node, argss):
                                 input_color=args.input_color)
     val_sampler = None
     val_loader = torch.utils.data.DataLoader(val_data, batch_size=args.test_batch_size,
-                                                shuffle=False, num_workers=args.test_workers, pin_memory=True,
+                                                shuffle=False, num_workers=args.test_workers, pin_memory=False,
                                                 drop_last=False, collate_fn=collation_fn_eval_all,
                                                 sampler=val_sampler)
 
@@ -390,6 +393,14 @@ def evaluate(model, val_data_loader, labelset_name='scannet_3d'):
                         preds.append(pred.cpu())
 
                     gts.append(label.cpu())
+
+                del coords, feat, label, feat_3d, mask, inds_reverse 
+    
+                # Force Python to clear System RAM
+                gc.collect() 
+                
+                # Force PyTorch to clear GPU VRAM
+                torch.cuda.empty_cache()
 
             if eval_iou:
                 gt = torch.cat(gts)
