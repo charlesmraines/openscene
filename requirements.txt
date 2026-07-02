@@ -8,4 +8,5 @@ imageio
 plyfile
 opencv-python
 sharedarray
+wandb
 git+https://github.com/openai/CLIP.git

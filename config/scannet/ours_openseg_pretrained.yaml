@@ -4,7 +4,7 @@ DATA:
   feature_2d_extractor: openseg
   classes: 20
   aug: True
-  voxel_size: 0.02
+  voxel_size: 0.1
   input_color: False
   use_shm: False
   
